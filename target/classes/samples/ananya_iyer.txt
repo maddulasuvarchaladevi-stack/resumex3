@@ -1,0 +1,23 @@
+Ananya Iyer
+ananya.iyer@example.com | +91 99887 76655 | Chennai
+
+PROFESSIONAL SUMMARY
+Machine learning engineer focused on NLP and semantic search.
+
+EXPERIENCE
+Machine Learning Engineer, DeepSense Analytics, Chennai
+Mar 2020 - Present
+- Built resume and document understanding pipelines with spaCy, Hugging Face transformers and Sentence-BERT embeddings
+- Deployed FastAPI services on Google Cloud Platform with Docker
+- Stored embeddings in FAISS and Pinecone vector databases
+
+Data Scientist, Insightly Labs, Chennai
+Jul 2018 - Feb 2020
+- Trained scikit-learn and TensorFlow models, wrote SQL and Python ETL jobs
+
+EDUCATION
+M.Sc. in Data Science, Anna University, Chennai, 2016 - 2018
+B.Sc. in Mathematics, Loyola College, 2013 - 2016
+
+SKILLS
+Python, NLP, Machine Learning, Deep Learning, Embeddings, FastAPI, Docker, GCP, SQL, Git, Statistics

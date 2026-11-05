@@ -1,0 +1,26 @@
+David Miller
+david.miller@example.com
++1 (415) 555-0134
+github.com/dmiller
+
+SUMMARY
+Principal engineer with 12+ years in distributed backend systems and cloud architecture.
+
+PROFESSIONAL EXPERIENCE
+Principal Engineer - Northwind Systems Inc., San Francisco
+Feb 2016 - Present
+- Architected Java 17 / Spring Boot microservices on Azure, running on Kubernetes
+- Introduced Terraform infrastructure as code and GitHub Actions continuous delivery
+- Designed event driven systems on Apache Kafka; PostgreSQL and Redis for storage
+- Mentored 10 engineers; led system design reviews of distributed systems
+
+Software Engineer, Contoso Corporation, Seattle
+Sep 2011 - Jan 2016
+- Developed J2EE and Hibernate applications on Oracle database; REST web services
+
+EDUCATION
+Master of Science in Computer Science
+University of Washington, 2009 - 2011
+
+SKILLS
+Java, Spring Boot, Microservices, Kafka, Azure, Kubernetes, Docker, Terraform, PostgreSQL, Redis, CI/CD, JUnit, System Design, Leadership

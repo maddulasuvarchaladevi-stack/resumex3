@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title} + ' · TalentRank'">TalentRank</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar" th:fragment="header">
+    <a class="brand" th:href="@{/}"><span class="logo">T</span> TalentRank <small>AI resume screening</small></a>
+    <nav><a th:href="@{/}">New screening</a></nav>
+</header>
+<footer class="footer" th:fragment="footer">
+    Built with Java 21 · Spring Boot · Thymeleaf · Apache PDFBox / POI — no JavaScript.
+    Resumes are processed in memory only and never stored on disk.
+</footer>
+</body>
+</html>

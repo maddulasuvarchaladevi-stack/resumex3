@@ -1,0 +1,107 @@
+# Skills taxonomy (ESCO / O*NET inspired, compact).
+# Format:  Canonical name | Category | alias1, alias2, ... | related canonical skills (names, comma separated)
+# Relations are made symmetric at load time. Matching is case-insensitive.
+
+# ---- Programming languages
+Java | Language | java, core java, java 8, java 11, java 17, java 21, j2ee, jdk | Spring Boot, Spring, Hibernate, Maven, Kotlin, JUnit
+Python | Language | python, python3, python 3 | Django, Flask, FastAPI, Pandas
+JavaScript | Language | javascript, ecmascript, es6, js | TypeScript, Node.js, React, Angular, Vue.js
+TypeScript | Language | typescript | JavaScript, Angular, React
+C++ | Language | c++, cpp | C, C#
+C | Language | c programming, ansi c | C++
+C# | Language | c#, c sharp | .NET, C++, ASP.NET
+Go | Language | golang, go lang, go programming | Docker, Kubernetes
+Rust | Language | rust, rust lang | C++
+Kotlin | Language | kotlin | Java, Android
+Swift | Language | swift, swiftui | iOS
+PHP | Language | php, laravel | MySQL
+Ruby | Language | ruby, ruby on rails, rails | PostgreSQL
+Scala | Language | scala | Spark, Java
+R | Language | r programming, r language, rstudio | Statistics, Python
+SQL | Language | sql, t-sql, pl/sql, plsql, structured query language | MySQL, PostgreSQL, Oracle, SQL Server
+HTML/CSS | Language | html, html5, css, css3, sass, scss | JavaScript, React
+Bash | Language | bash, shell scripting, shell script, powershell | Linux
+
+# ---- Java / backend ecosystem
+Spring Boot | Framework | spring boot, springboot | Spring, Java, REST APIs, Microservices
+Spring | Framework | spring, spring framework, spring mvc, spring security, spring data | Spring Boot, Hibernate, Java
+Hibernate | Framework | hibernate, jpa, java persistence api, orm | Spring, SQL, Java
+Maven | Tool | maven, apache maven | Gradle, Java
+Gradle | Tool | gradle | Maven
+JUnit | Tool | junit, junit5, mockito, testng | Testing, Java
+Django | Framework | django, django rest framework, drf | Python
+Flask | Framework | flask | Python
+FastAPI | Framework | fastapi | Python, REST APIs
+Node.js | Framework | node.js, nodejs, node, express.js, expressjs | JavaScript, REST APIs
+.NET | Framework | .net, dotnet, .net core, asp.net, asp.net core, entity framework | C#
+ASP.NET | Framework | asp.net mvc | .NET, C#
+REST APIs | Concept | rest, restful, rest api, rest apis, restful api, restful apis, web services, api development | Microservices, Spring Boot, FastAPI
+GraphQL | Concept | graphql | REST APIs
+Microservices | Concept | microservices, micro services, microservice architecture, service oriented architecture, soa | REST APIs, Docker, Kubernetes, Spring Boot
+Kafka | Tool | kafka, apache kafka, rabbitmq, message queue, message queues, activemq | Microservices
+
+# ---- Frontend
+React | Framework | react, react.js, reactjs, redux, next.js, nextjs | JavaScript, TypeScript, HTML/CSS
+Angular | Framework | angular, angularjs, rxjs | TypeScript, JavaScript
+Vue.js | Framework | vue, vue.js, vuejs, nuxt | JavaScript
+Android | Platform | android, android sdk, jetpack compose | Kotlin, Java
+iOS | Platform | ios, ios development, xcode, objective-c | Swift
+
+# ---- Databases
+MySQL | Database | mysql, mariadb | SQL, PostgreSQL
+PostgreSQL | Database | postgresql, postgres, pgvector | SQL, MySQL
+Oracle | Database | oracle db, oracle database | SQL
+SQL Server | Database | sql server, mssql, ms sql | SQL
+MongoDB | Database | mongodb, mongo, nosql, dynamodb, cassandra, couchdb | Redis
+Redis | Database | redis, memcached, caching | MongoDB
+Elasticsearch | Database | elasticsearch, elastic search, opensearch, solr | MongoDB, Vector Databases
+Vector Databases | Database | vector database, vector databases, vector db, faiss, chromadb, pinecone, milvus, weaviate | Embeddings, NLP
+
+# ---- Cloud & DevOps
+AWS | Cloud | aws, amazon web services, ec2, s3, lambda, amazon ec2, cloudformation | Cloud Computing, Azure, GCP
+Azure | Cloud | azure, microsoft azure, azure devops | Cloud Computing, AWS, GCP
+GCP | Cloud | gcp, google cloud, google cloud platform, bigquery, gke | Cloud Computing, AWS, Azure
+Cloud Computing | Cloud | cloud computing, cloud architecture, cloud infrastructure, cloud native, cloud-native | AWS, Azure, GCP, Docker
+Docker | DevOps | docker, containers, containerization, docker compose | Kubernetes, DevOps
+Kubernetes | DevOps | kubernetes, k8s, helm, openshift, eks, aks | Docker, DevOps
+CI/CD | DevOps | ci/cd, cicd, continuous integration, continuous delivery, continuous deployment, jenkins, github actions, gitlab ci, circleci | DevOps, Git
+DevOps | DevOps | devops, site reliability, sre, infrastructure as code | CI/CD, Docker, Kubernetes, Terraform
+Terraform | DevOps | terraform, ansible, pulumi | DevOps, AWS
+Git | Tool | git, github, gitlab, bitbucket, version control | CI/CD
+Linux | Platform | linux, unix, ubuntu, centos, rhel | Bash
+Monitoring | DevOps | monitoring, prometheus, grafana, datadog, observability, splunk | DevOps
+
+# ---- Data / ML / AI
+Machine Learning | AI | machine learning, ml, scikit-learn, sklearn, xgboost, supervised learning, predictive modeling, predictive modelling | Deep Learning, Data Science, Python, Statistics
+Deep Learning | AI | deep learning, neural networks, neural network, cnn, rnn, lstm, tensorflow, pytorch, keras | Machine Learning, NLP
+NLP | AI | nlp, natural language processing, spacy, nltk, named entity recognition, ner, text mining, text classification | Machine Learning, Deep Learning, Embeddings
+Embeddings | AI | embeddings, sentence-bert, sentence transformers, sentence-transformers, sbert, word2vec, semantic search, semantic similarity, bert, transformers, hugging face, huggingface | NLP, Vector Databases, Deep Learning
+LLMs | AI | llm, llms, large language models, large language model, generative ai, gpt, openai, langchain, rag, retrieval augmented generation, prompt engineering | NLP, Embeddings
+Computer Vision | AI | computer vision, opencv, image processing, image classification, object detection, ocr, tesseract | Deep Learning
+Data Science | Data | data science, data scientist, data mining, exploratory data analysis, eda | Machine Learning, Statistics, Python
+Statistics | Data | statistics, statistical analysis, hypothesis testing, a/b testing, regression analysis | Data Science, R
+Pandas | Data | pandas, numpy, scipy, jupyter | Python, Data Science
+Data Engineering | Data | data engineering, etl, elt, data pipelines, data pipeline, data warehouse, data warehousing, airflow, dbt, snowflake, redshift | Spark, SQL
+Spark | Data | spark, apache spark, pyspark, hadoop, hive, big data | Data Engineering, Scala
+Data Visualization | Data | data visualization, data visualisation, tableau, power bi, powerbi, looker, matplotlib | Data Science, SQL
+Excel | Tool | excel, microsoft excel, advanced excel, spreadsheets | Data Visualization
+
+# ---- Practices & process
+Agile | Practice | agile, scrum, kanban, sprint planning, sprints | Project Management
+Project Management | Practice | project management, program management, pmp, stakeholder management, product management, roadmap | Agile
+Testing | Practice | testing, unit testing, integration testing, test automation, qa, quality assurance, selenium, cypress, tdd, test driven development | JUnit
+System Design | Practice | system design, software architecture, distributed systems, design patterns, solution architecture, scalability | Microservices, Cloud Computing
+Data Structures & Algorithms | Practice | data structures, algorithms, dsa, competitive programming | System Design
+Security | Practice | security, cybersecurity, cyber security, owasp, penetration testing, oauth, jwt, encryption, application security | Spring
+Networking | Practice | networking, tcp/ip, dns, http, load balancing | Linux
+
+# ---- Soft skills
+Communication | Soft skill | communication, communication skills, presentation skills, stakeholder communication | Leadership
+Leadership | Soft skill | leadership, team lead, team leadership, mentoring, mentorship, people management | Communication, Project Management
+Problem Solving | Soft skill | problem solving, problem-solving, analytical skills, critical thinking | Communication
+
+# ---- Business functions
+Sales | Business | sales, business development, b2b sales, lead generation, crm, salesforce | Marketing
+Marketing | Business | marketing, digital marketing, seo, sem, content marketing, social media marketing | Sales
+Accounting | Business | accounting, financial analysis, bookkeeping, financial reporting, tally, quickbooks | Excel
+UI/UX Design | Design | ui/ux, ux design, ui design, user experience, figma, wireframing, prototyping, adobe xd, sketch | HTML/CSS

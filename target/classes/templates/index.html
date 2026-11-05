@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('New screening')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+
+<main class="container">
+    <section class="hero">
+        <h1>Rank resumes against a job description</h1>
+        <p>Upload resumes, describe the role, and get a transparent, ranked shortlist in seconds.</p>
+        <ol class="pipeline">
+            <li><b>1</b> Parse<br><small>PDF · DOCX · TXT</small></li>
+            <li><b>2</b> Extract<br><small>NER · skills taxonomy</small></li>
+            <li><b>3</b> Vectorise<br><small>TF-IDF on canonical skills</small></li>
+            <li><b>4</b> Score<br><small>cosine + weighted match</small></li>
+            <li><b>5</b> Shortlist<br><small>recruiter leaderboard</small></li>
+        </ol>
+    </section>
+
+    <div class="alert error" th:if="${error}" th:text="${error}" role="alert"></div>
+
+    <div class="grid two">
+        <form class="card" th:action="@{/screen}" method="post" enctype="multipart/form-data">
+            <h2>1 · Job description</h2>
+            <label for="jobTitle">Job title</label>
+            <input id="jobTitle" name="jobTitle" type="text" maxlength="120" required
+                   placeholder="e.g. Senior Java Backend Engineer" th:value="${jobTitle}">
+
+            <label for="jobDescription">Job description</label>
+            <textarea id="jobDescription" name="jobDescription" rows="9" required
+                      placeholder="Paste the full job posting..." th:text="${jobDescription}"></textarea>
+
+            <div class="row">
+                <div>
+                    <label for="mustHave">Must-have skills <small>(optional, comma separated)</small></label>
+                    <input id="mustHave" name="mustHave" type="text" placeholder="Java, Spring Boot, Docker"
+                           th:value="${mustHave}">
+                    <small class="hint">Blank = every skill detected in the description is required.</small>
+                </div>
+                <div class="narrow">
+                    <label for="minYears">Min. years <small>(optional)</small></label>
+                    <input id="minYears" name="minYears" type="number" min="0" max="40" step="0.5"
+                           placeholder="auto" th:value="${minYears}">
+                </div>
+            </div>
+
+            <h2>2 · Resumes</h2>
+            <label for="files">PDF, DOCX or TXT files <small>(up to 100, 10 MB each)</small></label>
+            <input id="files" name="files" type="file" multiple accept=".pdf,.docx,.txt">
+
+            <h2>3 · Scoring weights <small>(relative importance)</small></h2>
+            <div class="weights">
+                <label>Skill match<input name="ws" type="number" min="0" max="100" th:value="${weights.skill()}"></label>
+                <label>Semantic similarity<input name="wm" type="number" min="0" max="100" th:value="${weights.semantic()}"></label>
+                <label>Experience depth<input name="we" type="number" min="0" max="100" th:value="${weights.experience()}"></label>
+                <label>Education fit<input name="wd" type="number" min="0" max="100" th:value="${weights.education()}"></label>
+                <label>Shortlist threshold %<input name="threshold" type="number" min="0" max="100" th:value="${threshold}"></label>
+            </div>
+
+            <button class="btn primary" type="submit">Screen candidates</button>
+        </form>
+
+        <aside class="stack">
+            <form class="card accent" th:action="@{/demo}" method="post">
+                <h2>Try it with sample data</h2>
+                <p>Loads a Senior Java Backend Engineer posting and five sample resumes (strong, mid-level,
+                    ML engineer, over-qualified architect and an unrelated marketer).</p>
+                <button class="btn" type="submit">Run demo</button>
+            </form>
+            <div class="card">
+                <h2>How the score works</h2>
+                <p class="formula">Total = w₁·Skills + w₂·Semantic + w₃·Experience + w₄·Education</p>
+                <ul class="plain">
+                    <li><b>Skills</b> – required skills found (exact = 100%, related skill such as
+                        “Spring” for “Spring Boot” = 50%).</li>
+                    <li><b>Semantic</b> – cosine similarity of TF-IDF vectors where synonyms (GCP = Google Cloud
+                        Platform) share one dimension.</li>
+                    <li><b>Experience</b> – non-overlapping years from dated roles vs. the requirement.</li>
+                    <li><b>Education</b> – highest degree vs. the minimum in the posting.</li>
+                </ul>
+                <p class="hint">Scores support a recruiter's decision; they should not be the only basis for
+                    rejecting a candidate.</p>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

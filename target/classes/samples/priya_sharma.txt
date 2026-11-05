@@ -1,0 +1,28 @@
+Priya Sharma
+priya.sharma@example.com | +91 98765 43210 | Bengaluru, India
+linkedin.com/in/priyasharma
+
+SUMMARY
+Backend engineer with 7 years of experience building high-throughput payment services in Java.
+
+EXPERIENCE
+Senior Software Engineer | Finlytics Technologies Pvt Ltd, Bengaluru
+Jan 2021 - Present
+- Designed Spring Boot microservices processing 2M transactions/day with Kafka and PostgreSQL
+- Containerised services with Docker and deployed on Kubernetes (AWS EKS) using Jenkins CI/CD pipelines
+- Led a team of 4 developers, mentoring juniors and driving Agile ceremonies
+
+Software Engineer | CloudNine Solutions Pvt Ltd, Pune
+Jun 2017 - Dec 2020
+- Built RESTful APIs with Java 8, Hibernate and MySQL
+- Wrote unit tests with JUnit and Mockito, raising coverage to 85%
+- Introduced Redis caching and Elasticsearch based search
+
+EDUCATION
+B.Tech in Computer Science, National Institute of Technology, Trichy, 2013 - 2017
+
+SKILLS
+Java, Spring Boot, Hibernate, REST APIs, Microservices, Kafka, PostgreSQL, MySQL, Redis, Docker, Kubernetes, AWS, Git, System Design
+
+CERTIFICATIONS
+AWS Certified Solutions Architect - Associate

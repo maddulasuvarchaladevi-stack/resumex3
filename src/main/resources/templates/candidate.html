@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(${c.resume().name()})}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+
+<main class="container">
+    <p><a class="back" th:href="@{/results/{id}(id=${id},ws=${weights.skill()},wm=${weights.semantic()},we=${weights.experience()},wd=${weights.education()},t=${threshold})}">← Back to leaderboard</a></p>
+
+    <div class="page-head">
+        <div>
+            <p class="eyebrow">Rank #<span th:text="${c.rank()}">1</span> for <span th:text="${job.title()}">role</span></p>
+            <h1>
+                <span th:text="${c.resume().name()}">Name</span>
+                <span class="badge" th:classappend="'tier-' + ${#strings.toLowerCase(c.tier())}" th:text="${c.tier()} + ' match'">Strong</span>
+                <span class="badge short" th:if="${c.shortlisted()}">Shortlisted</span>
+            </h1>
+            <p class="muted">
+                <span th:if="${c.resume().email()}" th:text="${c.resume().email()}">email</span>
+                <span th:if="${c.resume().phone()}"> · <span th:remove="tag" th:text="${c.resume().phone()}">phone</span></span>
+                <span th:each="l : ${c.resume().links()}"> · <span th:remove="tag" th:text="${l}">link</span></span>
+            </p>
+        </div>
+        <div class="ring big" th:classappend="'tier-' + ${#strings.toLowerCase(c.tier())}"
+             th:style="'--p:' + ${c.overall()}"><span th:text="${c.overall()} + '%'">88%</span></div>
+    </div>
+
+    <div class="alert warn" th:each="w : ${c.resume().warnings()}" th:text="${w}"></div>
+
+    <div class="grid two">
+        <section class="card">
+            <h2>Score breakdown</h2>
+            <table class="table">
+                <thead><tr><th>Component</th><th>Weight</th><th>Score</th><th>Contribution</th></tr></thead>
+                <tbody>
+                <tr><td>Skill match</td><td th:text="${weights.skill()}">40</td><td th:text="${c.skill()} + '%'">0</td>
+                    <td th:text="${#numbers.formatDecimal(weights.skill() * c.skill() / weights.sum(), 1, 1)} + ' pts'">0</td></tr>
+                <tr><td>Semantic similarity</td><td th:text="${weights.semantic()}">25</td><td th:text="${c.semantic()} + '%'">0</td>
+                    <td th:text="${#numbers.formatDecimal(weights.semantic() * c.semantic() / weights.sum(), 1, 1)} + ' pts'">0</td></tr>
+                <tr><td>Experience depth</td><td th:text="${weights.experience()}">20</td><td th:text="${c.experience()} + '%'">0</td>
+                    <td th:text="${#numbers.formatDecimal(weights.experience() * c.experience() / weights.sum(), 1, 1)} + ' pts'">0</td></tr>
+                <tr><td>Education fit</td><td th:text="${weights.education()}">15</td><td th:text="${c.education()} + '%'">0</td>
+                    <td th:text="${#numbers.formatDecimal(weights.education() * c.education() / weights.sum(), 1, 1)} + ' pts'">0</td></tr>
+                </tbody>
+                <tfoot><tr><th colspan="3">Overall</th><th th:text="${c.overall()} + '%'">0</th></tr></tfoot>
+            </table>
+            <h3>Why this score</h3>
+            <ul class="plain"><li th:each="e : ${c.explanation()}" th:text="${e}">explanation</li></ul>
+        </section>
+
+        <section class="card">
+            <h2>Skills vs. requirements</h2>
+            <p>
+                <span class="chip ok" th:each="k : ${c.matchedSkills()}" th:text="'✓ ' + ${k}">✓ Java</span>
+                <span class="chip rel" th:each="e : ${c.relatedSkills()}" th:text="'≈ ' + ${e.key} + ' (via ' + ${e.value} + ')'">≈ X</span>
+                <span class="chip miss" th:each="k : ${c.missingSkills()}" th:text="'✗ ' + ${k}">✗ Docker</span>
+            </p>
+            <h3>Nice-to-have matched</h3>
+            <p>
+                <span class="chip nice" th:each="k : ${c.niceToHaveMatched()}" th:text="${k}">Redis</span>
+                <span class="muted" th:if="${#lists.isEmpty(c.niceToHaveMatched())}">None</span>
+            </p>
+            <h3>Other skills detected</h3>
+            <p>
+                <span class="chip" th:each="k : ${c.extraSkills()}" th:text="${k}">Skill</span>
+                <span class="muted" th:if="${#lists.isEmpty(c.extraSkills())}">None</span>
+            </p>
+        </section>
+    </div>
+
+    <section class="card">
+        <h2>Extracted entities (NER)</h2>
+        <dl class="entities">
+            <dt>Job titles</dt>
+            <dd><span class="chip" th:each="x : ${c.resume().jobTitles()}" th:text="${x}">x</span>
+                <span class="muted" th:if="${#lists.isEmpty(c.resume().jobTitles())}">none detected</span></dd>
+            <dt>Organisations</dt>
+            <dd><span class="chip" th:each="x : ${c.resume().organizations()}" th:text="${x}">x</span>
+                <span class="muted" th:if="${#lists.isEmpty(c.resume().organizations())}">none detected</span></dd>
+            <dt>Institutions</dt>
+            <dd><span class="chip" th:each="x : ${c.resume().institutions()}" th:text="${x}">x</span>
+                <span class="muted" th:if="${#lists.isEmpty(c.resume().institutions())}">none detected</span></dd>
+            <dt>Certifications</dt>
+            <dd><span class="chip" th:each="x : ${c.resume().certifications()}" th:text="${x}">x</span>
+                <span class="muted" th:if="${#lists.isEmpty(c.resume().certifications())}">none detected</span></dd>
+            <dt>Experience</dt>
+            <dd th:text="${#numbers.formatDecimal(c.resume().experienceYears(), 1, 1)} + ' years (merged, non-overlapping)'">5 years</dd>
+            <dt>Highest degree</dt>
+            <dd th:text="${c.resume().degreeLabel()}">Bachelor's</dd>
+        </dl>
+    </section>
+
+    <section class="card">
+        <h2>Resume sections</h2>
+        <details th:each="e : ${c.resume().sections()}">
+            <summary th:text="${e.key.name()}">SECTION</summary>
+            <pre th:text="${e.value}">text</pre>
+        </details>
+        <details>
+            <summary>RAW EXTRACTED TEXT</summary>
+            <pre th:text="${c.resume().rawText()}">text</pre>
+        </details>
+    </section>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

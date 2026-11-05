@@ -1,0 +1,24 @@
+RAHUL VERMA
+rahul.verma@example.com
++91 91234 56780 | Hyderabad
+
+PROFILE
+Full stack developer, 3 years of experience, mostly Java and some React.
+
+WORK EXPERIENCE
+Software Developer, Zentech Infotech Limited, Hyderabad
+Aug 2022 - Present
+- Developed REST services using Spring and MySQL
+- Built dashboards in React and JavaScript
+- Used Git and Jenkins for continuous integration
+
+Intern - Java Developer, Bytewise Software, Hyderabad
+Jan 2022 - Jul 2022
+- Worked on JDBC based modules and basic unit testing
+
+EDUCATION
+Bachelor of Technology in Information Technology
+Jawaharlal Nehru Technological University, 2018 - 2022
+
+TECHNICAL SKILLS
+Java, Spring, MySQL, React, JavaScript, HTML, CSS, Git, Jenkins

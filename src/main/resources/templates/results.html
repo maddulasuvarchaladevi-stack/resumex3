@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Leaderboard')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+
+<main class="container">
+    <div class="page-head">
+        <div>
+            <p class="eyebrow">Candidate leaderboard</p>
+            <h1 th:text="${job.title()}">Role</h1>
+            <p class="muted">
+                Requires <b th:text="${#lists.size(job.requiredSkills())}">0</b> skills ·
+                <b th:text="${job.requiredYears() > 0 ? #numbers.formatDecimal(job.requiredYears(), 1, 1) + '+ yrs' : 'no minimum experience'}">5 yrs</b> ·
+                <b th:text="${job.requiredDegreeLevel() > 0 ? job.requiredDegreeLabel() + ' degree' : 'no degree requirement'}">degree</b>
+            </p>
+        </div>
+        <div class="actions">
+            <a class="btn" th:href="@{/results/{id}/export.csv(id=${id},ws=${weights.skill()},wm=${weights.semantic()},we=${weights.experience()},wd=${weights.education()},t=${threshold})}">Export CSV</a>
+            <form th:action="@{/results/{id}/delete(id=${id})}" method="post">
+                <button class="btn danger" type="submit">Delete data</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert warn" th:if="${skipped != null}"
+         th:text="${skipped} + ' file(s) could not be read and were skipped.'"></div>
+
+    <section class="stats">
+        <div class="stat"><span th:text="${total}">0</span>Candidates</div>
+        <div class="stat good"><span th:text="${shortlistedCount}">0</span><em th:text="'Shortlisted (≥ ' + ${threshold} + '%)'">Shortlisted</em></div>
+        <div class="stat"><span th:text="${average} + '%'">0%</span>Average match</div>
+        <div class="stat"><span th:text="${#lists.size(job.niceToHaveSkills())}">0</span>Nice-to-have skills</div>
+    </section>
+
+    <section class="card">
+        <h2>Required skills</h2>
+        <p>
+            <span class="chip req" th:each="s : ${job.requiredSkills()}" th:text="${s}">Java</span>
+            <span class="muted" th:if="${#lists.isEmpty(job.requiredSkills())}">No known skills detected in the job description.</span>
+        </p>
+        <p th:if="${!#lists.isEmpty(job.niceToHaveSkills())}">
+            <small class="muted">Nice to have:</small>
+            <span class="chip nice" th:each="s : ${job.niceToHaveSkills()}" th:text="${s}">Redis</span>
+        </p>
+    </section>
+
+    <form class="card weights-bar" method="get" th:action="@{/results/{id}(id=${id})}">
+        <h2>Re-weight the ranking <small>(no re-upload needed)</small></h2>
+        <div class="weights">
+            <label>Skill match<input name="ws" type="number" min="0" max="100" th:value="${weights.skill()}"></label>
+            <label>Semantic<input name="wm" type="number" min="0" max="100" th:value="${weights.semantic()}"></label>
+            <label>Experience<input name="we" type="number" min="0" max="100" th:value="${weights.experience()}"></label>
+            <label>Education<input name="wd" type="number" min="0" max="100" th:value="${weights.education()}"></label>
+            <label>Threshold %<input name="t" type="number" min="0" max="100" th:value="${threshold}"></label>
+            <input type="hidden" name="view" th:value="${view}">
+            <button class="btn primary" type="submit">Apply</button>
+        </div>
+    </form>
+
+    <div class="tabs">
+        <a th:classappend="${view == 'all'} ? 'active'"
+           th:href="@{/results/{id}(id=${id},ws=${weights.skill()},wm=${weights.semantic()},we=${weights.experience()},wd=${weights.education()},t=${threshold})}">All candidates</a>
+        <a th:classappend="${view == 'shortlisted'} ? 'active'"
+           th:href="@{/results/{id}(id=${id},view='shortlisted',ws=${weights.skill()},wm=${weights.semantic()},we=${weights.experience()},wd=${weights.education()},t=${threshold})}">Shortlisted only</a>
+    </div>
+
+    <div class="alert info" th:if="${#lists.isEmpty(scores)}">No candidates reach the shortlist threshold. Lower it above to see more.</div>
+
+    <section class="board">
+        <article class="candidate" th:each="s : ${scores}" th:classappend="${s.shortlisted()} ? 'shortlisted'">
+            <div class="rank" th:text="'#' + ${s.rank()}">#1</div>
+            <div class="ring" th:classappend="'tier-' + ${#strings.toLowerCase(s.tier())}"
+                 th:style="'--p:' + ${s.overall()}"><span th:text="${s.overall()} + '%'">88%</span></div>
+            <div class="who">
+                <h3>
+                    <a th:href="@{/results/{id}/candidate/{i}(id=${id},i=${s.index()},ws=${weights.skill()},wm=${weights.semantic()},we=${weights.experience()},wd=${weights.education()},t=${threshold})}"
+                       th:text="${s.resume().name()}">Name</a>
+                    <span class="badge" th:classappend="'tier-' + ${#strings.toLowerCase(s.tier())}" th:text="${s.tier()}">Strong</span>
+                    <span class="badge short" th:if="${s.shortlisted()}">Shortlisted</span>
+                </h3>
+                <p class="muted">
+                    <span th:text="${#numbers.formatDecimal(s.resume().experienceYears(), 1, 1)} + ' yrs exp'">5 yrs</span> ·
+                    <span th:text="${s.resume().degreeLabel()}">Bachelor's</span> ·
+                    <span th:text="${s.resume().email() != null ? s.resume().email() : 'no email found'}">email</span> ·
+                    <span th:text="${s.resume().fileName()}">file</span>
+                </p>
+                <div class="chips">
+                    <span class="chip ok" th:each="k : ${s.matchedSkills()}" th:text="'✓ ' + ${k}">✓ Java</span>
+                    <span class="chip rel" th:each="e : ${s.relatedSkills()}" th:text="'≈ ' + ${e.key} + ' (via ' + ${e.value} + ')'">≈ X</span>
+                    <span class="chip miss" th:each="k : ${s.missingSkills()}" th:text="'✗ ' + ${k}">✗ Docker</span>
+                </div>
+            </div>
+            <div class="breakdown">
+                <div class="metric"><label>Skills</label><div class="bar"><span th:style="'width:' + ${s.skill()} + '%'"></span></div><b th:text="${s.skill()} + '%'">0%</b></div>
+                <div class="metric"><label>Semantic</label><div class="bar"><span th:style="'width:' + ${s.semantic()} + '%'"></span></div><b th:text="${s.semantic()} + '%'">0%</b></div>
+                <div class="metric"><label>Experience</label><div class="bar"><span th:style="'width:' + ${s.experience()} + '%'"></span></div><b th:text="${s.experience()} + '%'">0%</b></div>
+                <div class="metric"><label>Education</label><div class="bar"><span th:style="'width:' + ${s.education()} + '%'"></span></div><b th:text="${s.education()} + '%'">0%</b></div>
+            </div>
+        </article>
+    </section>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

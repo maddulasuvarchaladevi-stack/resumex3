@@ -1,0 +1,19 @@
+Senior Java Backend Engineer
+
+About the role
+We are looking for a Senior Java Backend Engineer to design and build scalable services for our payments platform.
+You will own services end to end, work in an Agile team and mentor junior developers.
+
+Requirements
+- 5+ years of experience building backend systems in Java (Java 11 or newer)
+- Strong knowledge of Spring Boot, Hibernate / JPA and RESTful API design
+- Experience with microservices, Kafka or other message queues
+- Solid SQL skills (PostgreSQL or MySQL)
+- Hands-on experience with Docker, Kubernetes and a public cloud (AWS, Azure or GCP)
+- CI/CD pipelines, unit testing with JUnit and Git
+- Bachelor's degree in Computer Science or a related field
+
+Nice to have
+- Experience with Redis and Elasticsearch
+- Knowledge of system design and distributed systems
+- Terraform / infrastructure as code
